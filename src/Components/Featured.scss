@@ -1,0 +1,140 @@
+$color-primary: #2a2b3d;
+$color-accent: #6366f1;
+$color-accent-light: #6366f163;
+$color-white: #fff;
+$color-black: #000;
+
+$font-family-primary: "Montserrat", sans-serif;
+
+$progressbar-stroke-width: 12;
+$progressbar-radius: 52;
+$progressbar-percent: 70;
+$pi: 3.14;
+$progressbar-circumference: 2 * $pi * $progressbar-radius;
+$progressbar-offset: $progressbar-circumference * (100 - $progressbar-percent) % 100;
+
+.featured {
+  flex: 2;
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  padding: 10px;
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #555;
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  .bottom {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .progressbarcontainer {
+      display: flex;
+      align-items: center;
+      /* flex-direction: column; */
+      justify-content: center;
+      /* height: 85vh; */
+      padding: 0 15px;
+
+      .progressbar {
+        position: relative;
+
+        &__path {
+          fill: transparent;
+          stroke: $color-accent-light;
+          stroke-width: $progressbar-stroke-width;
+        }
+
+        &__fill {
+          transform: rotate(-90deg);
+          transform-origin: center;
+          animation: progress 2s;
+          fill: transparent;
+          stroke: $color-accent;
+          stroke-dasharray: $progressbar-circumference;
+          stroke-dashoffset: $progressbar-offset;
+          stroke-linecap: round;
+          stroke-width: $progressbar-stroke-width;
+        }
+
+        &__title {
+          -o-table-baseline: central;
+          text-anchor: middle;
+        }
+      }
+      @keyframes progress {
+        from {
+          stroke-dasharray: 0 $progressbar-circumference;
+          stroke-dashoffset: 0;
+        }
+        to {
+          stroke-dasharray: $progressbar-circumference;
+          stroke-dashoffset: $progressbar-offset;
+        }
+      }
+    }
+
+    .title {
+      color: #555;
+      font-weight: 500;
+      margin: 10px;
+    }
+
+    .amount {
+      font-size: 30px;
+      margin: 10px;
+    }
+
+    .desc {
+      font-weight: 300;
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+    }
+
+    .summary {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .item {
+        text-align: center;
+        padding-right: 10px;
+
+        .itemTitle {
+          font-size: 14px;
+          color: #555;
+        }
+        .itemResult {
+          display: flex;
+          align-items: center;
+          margin-top: 10px;
+          font-size: 14px;
+
+          &.positive {
+            color: green;
+          }
+
+          &.negative {
+            color: red;
+          }
+
+          .resultAmount{
+            margin-left: 5px;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
